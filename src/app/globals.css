@@ -1,12 +1,32 @@
 @import "tailwindcss";
+html {
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: Almelo;
+  font-style: normal;
+  src: url('./font/fv_almelo-webfont.ttf') format("ttf");
+}
+
+
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  }
+  --font-display: "Almelo";
+  --color-moebius-100: rgb(174, 188, 204);
+  --color-moebius-200: rgb(148, 108, 132);
+  --color-moebius-300: rgb(242, 165, 155);
+  --color-moebius-400: rgb(196, 116, 84);
+  --color-moebius-500: rgb(98, 52, 34);
+  --color-moebius-600: rgb(83, 52, 44);
+}
+
+.font-display {
+  letter-spacing: 2px;
+}
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #ca9090;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,6 +44,7 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(238,174,202);
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(238,174,202,1) 10%, rgba(210,178,212,1) 44%, rgba(193,181,218,1) 61%, rgba(183,182,221,1) 71%, rgba(148,187,233,1) 79%, rgba(148,187,233,1) 100%);
+  word-spacing: 2px;
 }

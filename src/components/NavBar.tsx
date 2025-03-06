@@ -1,29 +1,82 @@
 'use client';
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-function NavBar() {
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleDropdown = () => {
-      setIsOpen(!isOpen);
-    }
+export default function NavBar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isActive, setActiveSection] = useState(null);
+  const [color, setColor] = useState(false);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  }
+  const elements = [
+    {
+      id: 'works',
+      text: 'Trabajos'
+    },
+    {
+      id: 'about',
+      text: 'Nosotros'
+    },
+      {
+        id:'contact',
+        text: 'Contactos'
+      }
+    ]
+
+    useEffect(()=>{
+      const options ={
+        root:null,
+        rootMargin: "0px",
+        threshold: 0.4
+      };
+      const observer = new IntersectionObserver((entries:any)=>{
+        entries.forEach((entry:any) =>{
+          if(entry.isIntersecting){
+            setActiveSection(entry.target.id);
+          }
+        });
+      }, options);
+      elements.forEach((list:any)=>{
+        const element = document.getElementById(list.id);
+        if(element) observer.observe(element);
+      });
+      return () => observer.disconnect();
+    }, [elements]);
+
+    useEffect(()=>{
+      const changeColor = () => {
+        if(window.scrollY >= 90){
+          setColor(true);
+        } else {
+          setColor(false);
+        }
+      }
+      window.addEventListener('scroll', changeColor);
+    })
+
   return (
-    <nav className="sticky top-0 z-50">
+    <nav className={`z-auto ${color?'bg-[#ffffff]':''}`}>
     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-      <div className="relative flex h-16 items-center justify-between">
-        <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+      <div className="relative flex h-20 items-center justify-between">
+        <div className="flex flex-1 items-stretch justify-start">
           <div className="flex shrink-0 items-center">
-            TILINKA INTERACTIVE
-            {/* <img className="h-8 w-auto" src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"> */}
+            {/* <img className="h-8 w-auto" src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"/> */}
+            <img className="h-15 w-auto" src="./assets/1.png" alt="Tilinka"/>
           </div>
         </div>
         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div className="hidden sm:ml-6 sm:block">
             <div className="flex space-x-4">
               {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-              <a href="#" className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Trabajos</a>
-              <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Nosotros</a>
-              <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contacto</a>
-            </div>
+              {elements.map((list:any)=>{
+                return(
+                  <Link key={list.id} href={`/#${list.id}`} className={`rounded-md px-3 border hover:border-emerald-900 py-2 text-gray-300 text-sm hover:font-bold ${isActive== list.id? "text-gray-800":""}`}>
+                    {list.text}
+                  </Link>
+                )
+              })}
+             </div>
           </div>
           {/* <button type="button" className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
             <span className="absolute -inset-1.5"></span>
@@ -79,5 +132,3 @@ function NavBar() {
   </nav>
   )
 }
-
-export default NavBar
