@@ -2,7 +2,7 @@ import React from "react";
 
 export default function LoginPage() {
   return (
-    <div className="flex justify-center pt-20 tracking-normal">
+    <div className="flex justify-center pt-20">
       <form className="mx-auto border rounded-2xl border-gray-900 overflow-hidden shadow-2xl bg-gradient-to-tl from-rose-100 from-0% via-emerald-200/60 via-50%">
         <div className="flex flex-cols-[20%_1fr] bg-gray-900">
         <img className="h-13 w-auto m-auto" src="../assets/LogoNegroW.png" alt="Tilinka"/>

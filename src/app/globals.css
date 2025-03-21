@@ -34,8 +34,6 @@ html {
   --color-palette-004: #B9848C;
   --color-palette-005: #806491;
 }
-* {
-}
 
 .font-display {
   letter-spacing: 2px;
@@ -59,11 +57,10 @@ html {
   padding: 0;
 } */
 
-body {
+.body-style {
   color: var(--foreground);
   background: rgb(2,49,94);
   background: -moz-linear-gradient(132deg, rgba(2,49,94,1) 0%, rgba(0,69,126,1) 11%, rgba(47,112,175,1) 27%, rgba(99,165,230,1) 50%, rgba(162,204,244,1) 82%, rgba(240,188,255,1) 100%);
   background: -webkit-linear-gradient(132deg, rgba(2,49,94,1) 0%, rgba(0,69,126,1) 11%, rgba(47,112,175,1) 27%, rgba(99,165,230,1) 50%, rgba(162,204,244,1) 82%, rgba(240,188,255,1) 100%);
   background: linear-gradient(132deg, rgba(2,49,94,1) 0%, rgba(0,69,126,1) 11%, rgba(47,112,175,1) 27%, rgba(99,165,230,1) 50%, rgba(162,204,244,1) 82%, rgba(240,188,255,1) 100%);
-  word-spacing: 2px;
 }
