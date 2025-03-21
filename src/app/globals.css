@@ -3,21 +3,38 @@ html {
   scroll-behavior: smooth;
 }
 
+#_next > div {
+  display: none !important; /* Esto oculta el logo de carga */
+}
+
 @font-face {
-  font-family: Almelo;
+  font-family: Rubik;
   font-style: normal;
-  src: url('./font/fv_almelo-webfont.ttf') format("ttf");
+  src: url('./font/Rubik/Rubik-VariableFont_wght.ttf') format("ttf");
 }
 
 
 @theme {
-  --font-display: "Almelo";
-  --color-moebius-100: rgb(174, 188, 204);
+  --font-display: "Rubik";
+  /* --color-moebius-100: rgb(174, 188, 204);
   --color-moebius-200: rgb(148, 108, 132);
   --color-moebius-300: rgb(242, 165, 155);
   --color-moebius-400: rgb(196, 116, 84);
   --color-moebius-500: rgb(98, 52, 34);
-  --color-moebius-600: rgb(83, 52, 44);
+  --color-moebius-600: rgb(83, 52, 44); */
+  /* --color-moebius-100: #40e0d0;
+  --color-moebius-200: #a7e8e8;
+  --color-moebius-300: #c1f1f1;
+  --color-moebius-400: #a29bfe;
+  --color-moebius-500: #6dd5fa;
+  --color-moebius-600: #d7e8f7; */
+  --color-palette-001: #02315E;
+  --color-palette-002: #00457E;
+  --color-palette-003: #2F70AF;
+  --color-palette-004: #B9848C;
+  --color-palette-005: #806491;
+}
+* {
 }
 
 .font-display {
@@ -25,8 +42,8 @@ html {
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #ca9090;
+  --background: #a29bfe;
+  --foreground: #d7e8f7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,7 +61,9 @@ html {
 
 body {
   color: var(--foreground);
-  background: rgb(238,174,202);
-  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(238,174,202,1) 10%, rgba(210,178,212,1) 44%, rgba(193,181,218,1) 61%, rgba(183,182,221,1) 71%, rgba(148,187,233,1) 79%, rgba(148,187,233,1) 100%);
+  background: rgb(2,49,94);
+  background: -moz-linear-gradient(132deg, rgba(2,49,94,1) 0%, rgba(0,69,126,1) 11%, rgba(47,112,175,1) 27%, rgba(99,165,230,1) 50%, rgba(162,204,244,1) 82%, rgba(240,188,255,1) 100%);
+  background: -webkit-linear-gradient(132deg, rgba(2,49,94,1) 0%, rgba(0,69,126,1) 11%, rgba(47,112,175,1) 27%, rgba(99,165,230,1) 50%, rgba(162,204,244,1) 82%, rgba(240,188,255,1) 100%);
+  background: linear-gradient(132deg, rgba(2,49,94,1) 0%, rgba(0,69,126,1) 11%, rgba(47,112,175,1) 27%, rgba(99,165,230,1) 50%, rgba(162,204,244,1) 82%, rgba(240,188,255,1) 100%);
   word-spacing: 2px;
 }

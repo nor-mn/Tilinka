@@ -5,11 +5,15 @@ import { useEffect, useState } from "react";
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isActive, setActiveSection] = useState(null);
-  const [color, setColor] = useState(false);
+  // const [color, setColor] = useState(false);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   }
   const elements = [
+    {
+      id: "home",
+      text: "Inicio"
+    },
     {
       id: 'works',
       text: 'Trabajos'
@@ -20,7 +24,7 @@ export default function NavBar() {
     },
       {
         id:'contact',
-        text: 'Contactos'
+        text: 'Contacto'
       }
     ]
 
@@ -44,25 +48,26 @@ export default function NavBar() {
       return () => observer.disconnect();
     }, [elements]);
 
-    useEffect(()=>{
-      const changeColor = () => {
-        if(window.scrollY >= 90){
-          setColor(true);
-        } else {
-          setColor(false);
-        }
-      }
-      window.addEventListener('scroll', changeColor);
-    })
+    // useEffect(()=>{
+    //   const changeColor = () => {
+    //     if(window.scrollY >= 90){
+    //       setColor(true);
+    //     } else {
+    //       setColor(false);
+    //     }
+    //   }
+    //   window.addEventListener('scroll', changeColor);
+    // })
 
   return (
-    <nav className={`z-auto ${color?'bg-[#ffffff]':''}`}>
+    <nav className="z-auto rounded-xl mx-5 mt-1 bg-gray-900">
+    {/* <nav className={`z-auto ${color?'bg-slate-100':''}`}> */}
     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-      <div className="relative flex h-20 items-center justify-between">
+      <div className="relative flex h-15 items-center justify-between">
         <div className="flex flex-1 items-stretch justify-start">
           <div className="flex shrink-0 items-center">
             {/* <img className="h-8 w-auto" src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"/> */}
-            <img className="h-15 w-auto" src="./assets/1.png" alt="Tilinka"/>
+            <img className="h-13 w-auto" src="./assets/LogoNegroW.png" alt="Tilinka"/>
           </div>
         </div>
         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -71,7 +76,7 @@ export default function NavBar() {
               {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
               {elements.map((list:any)=>{
                 return(
-                  <Link key={list.id} href={`/#${list.id}`} className={`rounded-md px-3 border hover:border-emerald-900 py-2 text-gray-300 text-sm hover:font-bold ${isActive== list.id? "text-gray-800":""}`}>
+                  <Link key={list.id} href={`/#${list.id}`} className={`rounded-md px-3 border hover:border-slate-500 py-1 text-sm tracking-tight ${isActive== list.id? "bg-palette-003 text-gray-900":""}`}>
                     {list.text}
                   </Link>
                 )
@@ -97,7 +102,7 @@ export default function NavBar() {
             </div>
           </div>
         </div>
-        <div className="flex inset-y-0 left-0 flex items-center sm:hidden">
+        <div className="flex inset-y-0 left-0 items-center sm:hidden">
           {/* <!-- Mobile menu button--> */}
           <button onClick={toggleDropdown} type="button" className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
             <span className="absolute -inset-0.5"></span>
@@ -124,8 +129,8 @@ export default function NavBar() {
       <div className="space-y-1 px-2 pt-2 pb-3">
         {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
         <a href="#" className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Trabajos</a>
-        <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Nosotros</a>
-        <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contacto</a>
+        <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-700 hover:text-white">Nosotros</a>
+        <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-700 hover:text-white">Contacto</a>
       </div>
     </div>
     )}

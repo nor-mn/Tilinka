@@ -5,13 +5,13 @@ import localFont from 'next/font/local'
 import NavBar from "@/components/NavBar";
  
 // Font files can be colocated inside of `pages`
-const almelo = localFont({ src: [
+const rubik = localFont({ src: [
   {
-    path: './font/fv_almelo-webfont.woff',
+    path: './font/Rubik/Rubik-VariableFont_wght.ttf',
     weight: '400',
     style: 'normal'
   }],
-  variable: "--font-almelo",
+  variable: "--font-rubik",
 })
 
 export const metadata: Metadata = {
@@ -31,9 +31,6 @@ export default function RootLayout({
   return (
     <html lang="en" className='scroll-smooth'>
       <body className="relative min-h-screen font-display">
-        <header className="fixed top-0 w-full z-40">
-          <NavBar></NavBar> 
-        </header>
         {children}
       </body>
     </html>
