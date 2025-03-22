@@ -1,3 +1,5 @@
+"use client";
+
 import BarChart from "@/components/BarChart";
 
 // app/dashboard/page.tsx
