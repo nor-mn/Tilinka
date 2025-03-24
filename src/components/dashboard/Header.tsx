@@ -16,12 +16,17 @@ const UserDropdown = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const { user, logout } = useAuth();
-  const handleClick = () => {
+  const closeSession = () => {
     setLoading(true);
     logout();
     setTimeout(() => setLoading(false), 2000);
   };
-  console.log(user,'us')
+
+  // const handleResetPassword = () => {
+    // setLoading(true);
+    // resetPassword(user?.email);
+    // setTimeout(() => setLoading(false), 2000);
+  // };
   return (
     <>
     <div className="relative inline-block m-2">
@@ -38,12 +43,15 @@ const UserDropdown = () => {
             <li className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
               Perfil
             </li>
-            {/* <li className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            {/* <li 
+              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              onClick={handleResetPassword}
+              >
               Cambio de contraseña
             </li> */}
             <li
               className="flex items-center gap-2 px-4 py-2 hover:bg-red-100 text-red-600 cursor-pointer"
-              onClick={handleClick}
+              onClick={closeSession}
             >
               { loading?<Loading fullScreen/>:<><LogOut size={16} /> Cerrar sesión</>}
             </li>

@@ -50,7 +50,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await setDoc(doc(db, "users", user.uid), {
       id: user.uid,
       username,
-      mail: email,
+      email: email,
       role: role ?? "client",
       company,
       active: true

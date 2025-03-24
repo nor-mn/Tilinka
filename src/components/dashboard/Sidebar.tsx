@@ -1,15 +1,20 @@
 "use client";
-import { createContext, useContext, useState } from "react";
-import { Header } from "./Header";
+
+import React, { createContext, useContext, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface Props {
    children?: React.ReactNode;
    content?: React.ReactNode;
-   icon?: React.ReactNode;
-   text?: React.ReactNode;
-   active?: React.ReactNode;
+}
+
+interface SidebarItemsProps {
    alert?: React.ReactNode;
+   icon?: React.ReactNode;
+   text?: string;
+   url?: string;
 }
 
 const SidebarContext = createContext({});
@@ -36,11 +41,15 @@ export default function Sidebar({ children, ...props }: Props) {
    );
 }
 
-export function SidebarItem({ icon, text, active, alert, ...props }: Props) {
-   const { expanded }: any = useContext(SidebarContext)
+export function SidebarItems({ icon, text, alert, url, ...props }: SidebarItemsProps) {
+   const pathname = usePathname();
+   const isActive = pathname === url;
+   const { expanded }: any = useContext(SidebarContext);
    return (
-      <li
-         className={`relative flex items-center py-2 px-3 my-1 font-medium border border-gray-900 rounded-md cursor-pointer transition-colors text-gray-900 group ${active
+      <Link
+         key={url}
+         href={url??''}
+         className={`relative flex items-center py-2 px-3 my-1 font-medium border border-gray-900 rounded-md cursor-pointer transition-colors text-gray-900 group ${isActive
             ? "bg-gradient-to-tr from-palette-003 to-indigo-100"
             : "bg-gray-300 hover:bg-palette-003"
             }`}
@@ -61,6 +70,6 @@ export function SidebarItem({ icon, text, active, alert, ...props }: Props) {
                {text}
             </div>
          )}
-      </li>
+      </Link>
    );
 }
