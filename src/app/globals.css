@@ -8,14 +8,20 @@ html {
 }
 
 @font-face {
-  font-family: Rubik;
+  font-family: 'Rubik';
+  src: url('/assets/fonts/Rubik/Rubik-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
   font-style: normal;
-  src: url('./font/Rubik/Rubik-VariableFont_wght.ttf') format("ttf");
 }
 
+@font-face {
+  font-family: 'Rubik';
+  src: url('/assets/fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
 
 @theme {
-  --font-display: "Rubik";
   /* --color-moebius-100: rgb(174, 188, 204);
   --color-moebius-200: rgb(148, 108, 132);
   --color-moebius-300: rgb(242, 165, 155);
@@ -63,4 +69,8 @@ html {
   background: -moz-linear-gradient(132deg, rgba(2,49,94,1) 0%, rgba(0,69,126,1) 11%, rgba(47,112,175,1) 27%, rgba(99,165,230,1) 50%, rgba(162,204,244,1) 82%, rgba(240,188,255,1) 100%);
   background: -webkit-linear-gradient(132deg, rgba(2,49,94,1) 0%, rgba(0,69,126,1) 11%, rgba(47,112,175,1) 27%, rgba(99,165,230,1) 50%, rgba(162,204,244,1) 82%, rgba(240,188,255,1) 100%);
   background: linear-gradient(132deg, rgba(2,49,94,1) 0%, rgba(0,69,126,1) 11%, rgba(47,112,175,1) 27%, rgba(99,165,230,1) 50%, rgba(162,204,244,1) 82%, rgba(240,188,255,1) 100%);
+}
+
+body{
+  font-family:'Rubik';
 }

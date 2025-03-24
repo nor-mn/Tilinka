@@ -3,19 +3,20 @@
 import { AuthProvider } from '@/context/AuthContext';
 import { Header } from "@/components/dashboard/Header";
 import Sidebar, { SidebarItem } from '@/components/dashboard/Sidebar';
-import localFont from 'next/font/local'
+// import localFont from 'next/font/local'
 import "../globals.css";
 import useProtectedRoute from '@/hooks/useProtectedRoute';
+import Loading from '@/components/Loading';
 
-const rubik = localFont({
-  src: [
-    {
-      path: '../font/Rubik/Rubik-VariableFont_wght.ttf',
-      weight: '400',
-      style: 'normal'
-    }],
-  variable: "--font-rubik",
-})
+// const rubik = localFont({
+//   src: [
+//     {
+//       path: '../font/Rubik/Rubik-VariableFont_wght.ttf',
+//       weight: '400',
+//       style: 'normal'
+//     }],
+//   variable: "--font-rubik",
+// })
 
 export default function DashboardLayout({
   children,
@@ -25,14 +26,16 @@ export default function DashboardLayout({
   return (
     <AuthProvider>
         <html lang="en">
-          <body className="flex font-display bg-gradient-to-t from-sky-100 from-0% via-gray-50 via-50% to-neutral-200 to-100% tracking-normal">
+          <body className="flex font-display bg-gradient-to-t from-sky-100 from-0% via-gray-50 via-50% to-neutral-200 to-100%">
       <ProtectedContent>
             <Sidebar content={children}>
-              <SidebarItem icon="A" text="Dashboard" active />
-              <SidebarItem icon="B" text="Totem" />
-              <SidebarItem icon="C" text="Contacto" alert />
+              <SidebarItem icon="D" text="Dashboard" active />
+              <SidebarItem icon="U" text="Users"/>
+              <SidebarItem icon="P" text="Productos"/>
+              <SidebarItem icon="S" text="Servicios" />
+              {/* <SidebarItem icon="S" text="Servicios" alert /> */}
             </Sidebar>
-            <div className='w-screen h-screen overflow-y-auto'>
+            <div className='w-screen h-screen overflow-y-auto tracking-normal'>
               <Header />
               <div className='pt-20'>
                 {children}
@@ -48,7 +51,7 @@ export default function DashboardLayout({
 function ProtectedContent({ children }: { children: React.ReactNode }) {
   const { isAllowed, loading } = useProtectedRoute();
 
-  if (loading) return <p>Cargando...</p>;
+  if (loading) return  <Loading fullScreen />;
   if (!isAllowed) return null; // No renderiza nada si no está permitido
 
   return <>{children}</>;
