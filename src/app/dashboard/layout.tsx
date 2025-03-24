@@ -7,6 +7,7 @@ import Sidebar, { SidebarItem } from '@/components/dashboard/Sidebar';
 import "../globals.css";
 import useProtectedRoute from '@/hooks/useProtectedRoute';
 import Loading from '@/components/Loading';
+import { Bot, LayoutDashboard, Settings, Users } from 'lucide-react';
 
 // const rubik = localFont({
 //   src: [
@@ -29,17 +30,15 @@ export default function DashboardLayout({
           <body className="flex font-display bg-gradient-to-t from-sky-100 from-0% via-gray-50 via-50% to-neutral-200 to-100%">
       <ProtectedContent>
             <Sidebar content={children}>
-              <SidebarItem icon="D" text="Dashboard" active />
-              <SidebarItem icon="U" text="Users"/>
-              <SidebarItem icon="P" text="Productos"/>
-              <SidebarItem icon="S" text="Servicios" />
+              <SidebarItem icon={<LayoutDashboard/>} text="Dashboard" active />
+              <SidebarItem icon={<Users/>} text="Usuarios"/>
+              <SidebarItem icon={<Bot/>} text="Productos"/>
+              <SidebarItem icon={<Settings/>} text="Configuraciones" />
               {/* <SidebarItem icon="S" text="Servicios" alert /> */}
             </Sidebar>
             <div className='w-screen h-screen overflow-y-auto tracking-normal'>
               <Header />
-              <div className='pt-20'>
                 {children}
-              </div>
             </div>
       </ProtectedContent>
           </body>
