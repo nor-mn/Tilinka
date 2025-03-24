@@ -3,10 +3,9 @@ import { FC } from "react";
 interface LoadingProps {
   fullScreen?: boolean;
   small?: boolean;
-  text?: string;
 }
 
-const Loading: FC<LoadingProps> = ({ fullScreen, small, text }) => {
+const Loading: FC<LoadingProps> = ({ fullScreen, small }) => {
   return (
     <div
       className={
@@ -15,16 +14,13 @@ const Loading: FC<LoadingProps> = ({ fullScreen, small, text }) => {
           : "flex items-center justify-center w-full h-full"
       }
     >
-      <>
-        {text}
-        <div
+    <div
           className={
             small
               ? "w-6 h-6 border-3 border-t-transparent border-palette-005 rounded-full animate-spin"
-              : "w-12 h-12 border-10 border-t-transparent border-palette-005 rounded-full animate-spin"
+              : "w-15 h-15 border-5 border-t-transparent border-palette-005 rounded-full animate-spin"
           }
         />
-      </>
     </div>
   );
 };
