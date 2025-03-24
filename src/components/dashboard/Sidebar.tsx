@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useContext, useState } from "react";
 import { Header } from "./Header";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Props {
    children?: React.ReactNode;
@@ -24,7 +25,7 @@ export default function Sidebar({ children, ...props }: Props) {
                      onClick={() => setExpanded((curr) => !curr)}
                      className="p-1.5 rounded-lg ml-3 w-10 text-gray-50 cursor-pointer"
                   >
-                     {expanded ? 'O' : 'C'}
+                     {expanded ? <ChevronLeft/> : <ChevronRight/>}
                   </button>
                </div>
                <SidebarContext.Provider value={{ expanded }}>
@@ -39,9 +40,9 @@ export function SidebarItem({ icon, text, active, alert, ...props }: Props) {
    const { expanded }: any = useContext(SidebarContext)
    return (
       <li
-         className={`relative flex items-center py-2 px-3 my-1 font-medium border border-gray-900 rounded-md cursor-pointer transition-colors group ${active
-            ? "bg-gradient-to-tr from-palette-003 to-indigo-100 text-gray-50"
-            : "bg-gray-300 hover:bg-palette-003 text-gray-900"
+         className={`relative flex items-center py-2 px-3 my-1 font-medium border border-gray-900 rounded-md cursor-pointer transition-colors text-gray-900 group ${active
+            ? "bg-gradient-to-tr from-palette-003 to-indigo-100"
+            : "bg-gray-300 hover:bg-palette-003"
             }`}
       >
          {icon}
@@ -56,7 +57,7 @@ export function SidebarItem({ icon, text, active, alert, ...props }: Props) {
          )}
          {!expanded && (
             <div
-               className={`absolute left-full rounded-md px-2 py-1 ml-6 bg-indigo-100 text-indigo-800 text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}>
+               className={`absolute left-full rounded-md px-2 py-1 ml-6 border border-palette-002 bg-white text-palette-001 text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}>
                {text}
             </div>
          )}
