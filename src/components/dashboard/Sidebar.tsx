@@ -16,7 +16,7 @@ const SidebarContext = createContext({});
 export default function Sidebar({ children, ...props }: Props) {
    const [expanded, setExpanded] = useState(true);
    return (
-         <aside className="h-screen bg-white">
+         <aside className="h-screen bg-white tracking-normal">
             <nav className="h-full flex flex-col border-r shadow-sm">
                <div className="h-15 p-4 pb-2 flex justify-between items-center bg-gray-900">
                   <img src=".././assets/1.png" className={`overflow-hidden transition-all ${expanded ? "w-32" : "w-0"}`} alt="logo" />
