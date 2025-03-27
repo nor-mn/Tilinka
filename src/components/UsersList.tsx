@@ -20,7 +20,7 @@ const UsersList = () => {
         </thead>
         <tbody>
           {
-            users.map((user:any)=>(
+            users.map((user)=>(
                 <tr key={user.id}>
                     <td className="border border-gray-300 p-1">{user.company}</td>
                     <td className="border border-gray-300 p-1">{user.username}</td>

@@ -2,24 +2,22 @@
 
 import { useAuth } from "@/context/AuthContext";
 import { db } from "@/firebase/firebase";
-import {
-  collection,
-  doc,
-  onSnapshot,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-// type User = {
-//     username: string;
-//     email: string;
-//     company: string;
-//     id:string
-// }
+type User = {
+  id?: string;
+  username: string;
+  email: string;
+  role: string;
+  company: string;
+  active: boolean;
+  phoneNumber: string;
+};
 
 export const useUsers = () => {
   const { userData } = useAuth();
-  const [users, setUsers] = useState<any>(null);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
     if (!userData?.id) return;
@@ -31,7 +29,7 @@ export const useUsers = () => {
           id: doc.id,
           ...doc.data(),
         }))
-        .filter((userDoc) => userDoc.id !== userData.id);
+        .filter((userDoc) => userDoc.id !== userData.id) as User[];
 
       setUsers(usersList);
     });
