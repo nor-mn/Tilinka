@@ -31,17 +31,19 @@ export default function RegisterPage() {
     }
   };
   return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="flex justify-center pt-20">
+<div className="mx-auto border rounded-2xl border-gray-900 overflow-hidden p-3">
+<form onSubmit={handleSubmit} className="flex flex-col gap-2">
       <h1 className="text-2xl mb-4">Registro</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
       {error && <p className="text-red-500">{error}</p>}
-        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Contraseña" onChange={handleChange} required />
-        <input type="text" name="username" placeholder="Nombre de usuario" onChange={handleChange} required />
-        <input type="text" name="role" placeholder="Rol" onChange={handleChange} required />
-        <input type="text" name="company" placeholder="Empresa" onChange={handleChange} required />
+        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500" type="email" name="email" placeholder="Email" onChange={handleChange} required />
+        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500" type="password" name="password" placeholder="Contraseña" onChange={handleChange} required />
+        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="username" placeholder="Nombre de usuario" onChange={handleChange} required />
+        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="role" placeholder="Rol" onChange={handleChange} required />
+        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="company" placeholder="Empresa" onChange={handleChange} required />
         <button type="submit" className="bg-blue-500 text-white p-2">Registrarse</button>
       </form>
+</div>
     </div>
   );
 }
