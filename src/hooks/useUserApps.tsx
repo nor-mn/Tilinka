@@ -17,7 +17,7 @@ type App = {
 
 export const useUserApps = () => {
   const { user } = useAuth();
-  const [apps, setApps] = useState<App[]>([]);
+  const [myApps, setMyApps] = useState<App[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const useUserApps = () => {
           ...doc.data(),
         })) as App[];
 
-        setApps(appsList);
+        setMyApps(appsList);
       });
 
       return () => unsubscribe();
@@ -63,5 +63,5 @@ export const useUserApps = () => {
     }
   };
 
-  return { apps, loading, addApp };
+  return { myApps, loading, addApp };
 };

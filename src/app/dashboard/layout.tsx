@@ -48,10 +48,9 @@ export const Elements = () => {
     <>
       <SidebarItems url="/dashboard" icon={<LayoutDashboard />} text="Dashboard" />
       {userData?.role === "admin" && <SidebarItems url="/dashboard/users" icon={<Users />} text="Usuarios" />}
-      <SidebarItems url="/dashboard/products" icon={<Bot />} text="Productos" />
       <SidebarItems url="/dashboard/apps" icon={<Bot />} text="Aplicaciones" />
       <SidebarItems url="/dashboard/my-apps" icon={<Bot />} text="Mis aplicaciones" />
-      <SidebarItems url="/dashboard/configs" icon={<Settings />} text="Configuraciones" />
+      <SidebarItems url="/dashboard/settings" icon={<Settings />} text="Configuraciones" />
       {/* <SidebarItems url="/dashboard" icon="S" text="Servicios" alert /> */}
     </>
   )
