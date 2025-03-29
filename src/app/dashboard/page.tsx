@@ -1,6 +1,7 @@
 "use client";
 
 import BarChart from "@/components/BarChart";
+import ParticipantsList from "@/components/ParticipantsList";
 
 // app/dashboard/page.tsx
 export default function DashboardPage() {
@@ -40,6 +41,9 @@ export default function DashboardPage() {
           <strong className="text-5xl">32</strong>
         </div>
       </div>
+    </div>
+    <div>
+      <ParticipantsList/>
     </div>
   </div>;
 }
