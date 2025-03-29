@@ -51,7 +51,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       id: user.uid,
       username,
       email: email,
-      role: role ?? "client",
+      role: "user",
       company,
       active: true
     })
