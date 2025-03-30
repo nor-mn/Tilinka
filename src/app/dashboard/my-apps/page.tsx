@@ -3,7 +3,8 @@ import React from 'react'
 
 export default function MyApps() {
   return (
-    <div className="p-6 grid grid-cols-6 gap-4">
+    <div className="py-4 px-6">
+      <p className='text-[30px]'>Mis aplicaciones</p>
         <MyAppsList/>
     </div>
   )
