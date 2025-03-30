@@ -4,24 +4,26 @@ interface Props {
     onClose: () => void;
     title: string;
     children: ReactNode;
-    button: ReactNode;
 }
 
-export const Modal = ({ isOpen, onClose, title, children, button}: Props) => {
+export const Modal = ({ isOpen, onClose, title, children}: Props) => {
     if(!isOpen) return null;
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/60 bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg w-96">
-        <h2 className="text-xl mb-4">{title}</h2>
-        <div>{children}</div>
+      <div className="bg-white rounded-lg w-96">
+        <div className='bg-gray-900 rounded-t-lg p-3 text-gray-100 text-center'>
+        <h2 className="text-xl">{title}</h2>
+        </div>
+        <div className="p-6 border border-gray-900 rounded-b-lg">
+        {children}
         <div className="mt-4 flex justify-between">
-            {button}
           <button
             onClick={onClose}
-            className="cursor-pointer bg-gray-500 text-white py-2 px-4 rounded-md"
+            className=" border border-gray-900 cursor-pointer bg-gray-400 py-2 px-4 rounded-2xl"
           >
             Cancelar
           </button>
+        </div>
         </div>
       </div>
     </div>

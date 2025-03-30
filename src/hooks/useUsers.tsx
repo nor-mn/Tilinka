@@ -28,9 +28,9 @@ export const useUsers = () => {
       const usersList = querySnapshot.docs
         .map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          ...doc.data() as User,
         }))
-        .filter((userDoc) => userDoc.id !== userData.id) as User[];
+        .filter((userDoc) => userDoc.id !== userData.id && userDoc.role !== "admin") as User[];
 
       setUsers(usersList);
     });

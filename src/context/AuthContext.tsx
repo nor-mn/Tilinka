@@ -11,7 +11,7 @@ const AuthContext = createContext<any>(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [userData, setUserData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -43,19 +43,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => unsubscribe();
   }, []);
 
-  const register = async (email: string, password: string, username: string, role: string, company: string) => {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const register = async (email: string, password: string, username: string, phone_number: string, company: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const currentUser = auth.currentUser;
+    let adminEmail = "";
+    let adminPassword = "";
+    if (currentUser) {
+      adminEmail = currentUser.email!;
+      adminPassword = prompt("Ingresa tu contraseña")!;
+    }
+
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    //Guardar en firestore
     await setDoc(doc(db, "users", user.uid), {
       id: user.uid,
       username,
       email: email,
+      phone_number: phone_number,
       role: "user",
       company,
       active: true
-    })
+    });
+    console.log('Usuario registrado: ', user.uid);
+    if (currentUser) {
+      await signInWithEmailAndPassword(auth, adminEmail, adminPassword);
+      console.log("Sesión de administrador restaurada");
+    }
+
     return user;
+    } catch (error: any) {
+      console.log("Error al registrar usuario: ", error.message);
+      throw new Error(error.message)
+    }
   }
 
   const login = async (email: string, password: string) => {
