@@ -43,7 +43,7 @@ export default function DashboardPage() {
       </div>
     </div>
     <div>
-      <ParticipantsList/>
+      {/* <ParticipantsList/> */}
     </div>
   </div>;
 }
