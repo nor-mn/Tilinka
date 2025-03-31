@@ -66,7 +66,7 @@ export const useParticipants = (myAppId: string) => {
       });
       getParticipants();
     } catch (err) {
-      setError("Error al agregar el participante");
+      setError("Error al añadir el participante");
     }
   };
 
