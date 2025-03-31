@@ -1,23 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { db } from "@/firebase/firebase";
-import { doc, collection, addDoc, onSnapshot } from "firebase/firestore";
+import { doc, collection, addDoc, onSnapshot, getDoc } from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
 
 type App = {
   id?: string;
+  name: string;
   appdir: string;
   appid: string;
   appping: number;
-  finishedgames: number;
-  gameplaytime: number;
-  startedgames: number;
-  time: string;
+  // totalGamePlayTime: number;
+  totalStartedGames: number;
+  totalFinishedGames: number;
   active: boolean;
 };
 
 export const useUserApps = () => {
   const { user } = useAuth();
   const [myApps, setMyApps] = useState<App[]>([]);
+  const [myApp, setMyApp] = useState<App | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -46,13 +47,13 @@ export const useUserApps = () => {
       const appsRef = collection(userRef, "my-apps");
 
       const newApp = {
+        name: "Cows",
         appdir: "/default",
         appid: crypto.randomUUID(),
-        appping: 100,
-        finishedgames: 0,
-        gameplaytime: 0,
-        startedgames: 0,
-        time: new Date().toISOString(),
+        appping: Math.floor(Math.random() * 100) + 1,
+        totalGamePlayTime: Math.floor(Math.random() * 1000) + 1,
+        totalStartedGames: Math.floor(Math.random() * 1000) + 1,
+        totalFinishedGames: Math.floor(Math.random() * 1000) + 1,
         active: true,
       };
 
@@ -63,5 +64,31 @@ export const useUserApps = () => {
     }
   };
 
-  return { myApps, loading, addApp };
+  const getMyApp = async (id:string) => {
+    if(!id) return;
+    try {
+      setLoading(true);
+      const userRef = doc(db, "users", user.uid);
+      const appRef = doc(userRef, 'my-apps', id);
+      const querySnapshot = await getDoc(appRef);
+      
+      if (querySnapshot.exists()) {
+        const app = {
+          id: querySnapshot.id,
+          ...querySnapshot.data()
+        } as App;
+
+        setMyApp(app); // Actualiza el estado con los datos obtenidos
+      } else {
+        console.log('No encontrado');
+      }
+
+    } catch (error) {
+      console.log('Error al extraer datos', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return { myApps, myApp, loading, addApp, getMyApp };
 };
