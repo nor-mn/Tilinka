@@ -29,7 +29,7 @@ export const useParticipants = (myAppId: string) => {
   const [error, setError] = useState<string | null>(null);
 
   const getParticipants = useCallback(async () => {
-    if (!user.uid || !myAppId) return;
+    if (!user?.uid || !myAppId) return;
     setLoading(true);
     setError(null);
 

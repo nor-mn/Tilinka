@@ -89,19 +89,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const userRef = doc(db, "users", user.uid);
       const userSnap = await getDoc(userRef);
 
-      if (!userSnap.exists()) throw new Error("No se encontraron datos del usuario.");
+      if (!userSnap.exists()) return setError("No se encontraron datos del usuario.");
 
       const userData = userSnap.data();
       if (!userData.active) {
         await signOut(auth);
-        throw new Error("Tu cuenta está desactivada. Contacta al administrador.");
+        return setError("Tu cuenta está desactivada. Contacta al administrador.");
       }
 
       setUser(user);
       setUserData(userData);
       router.push("/dashboard/my-apps");
     } catch (error: any) {
-      setError(error.message); // 🔹 Guardar mensaje de error
+      setError("Tus credenciales son incorrectos.");
     } finally {
       setLoading(false);
     }
@@ -119,7 +119,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, userData, loading, register, login, logout, error }}>
+    <AuthContext.Provider value={{ user, userData, loading, register, login, logout, error, setError }}>
       {children}
     </AuthContext.Provider>
   );

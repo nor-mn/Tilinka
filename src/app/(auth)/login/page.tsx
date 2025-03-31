@@ -1,10 +1,11 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
+import { X } from "lucide-react";
 import React, { useState } from "react";
 
 export default function LoginPage() {
-  const { login, error } = useAuth();
+  const { login, error, setError } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,54 +17,63 @@ export default function LoginPage() {
     setLoading(false);
   };
   return (
-    <div className="flex justify-center pt-20">
-      <div className="mx-auto border rounded-2xl border-gray-900 overflow-hidden shadow-2xl bg-gradient-to-tl from-rose-100 from-0% via-emerald-200/60 via-50%">
-        <div className="flex flex-cols-[20%_1fr] bg-gray-900">
-          <img className="h-13 w-auto m-auto" src="../assets/LogoNegroW.png" alt="Tilinka" />
-          <h3 className="p-5 text-center">Inicio de Sesión</h3>
+    <div className="flex items-center justify-center min-h-screen px-4">
+      <div className="w-full max-w-md border border-gray-900  rounded-2xl overflow-hidden shadow-lg bg-gradient-to-tl from-rose-100 from-0% via-emerald-200/60 via-50%">
+
+        <div className="flex flex-cols justify-center bg-gray-900 p-4">
+          <img 
+            className="h-12 w-auto mr-3"
+            src="/logo.png"
+            alt="Tilinka"
+          />
+          <h1 className="text-white text-2xl font-semibold mt-2">Inicio de Sesión</h1>
         </div>
-        <form onSubmit={handleLogin}>
-        <div className="px-20 py-10">
-        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-          <div className="mb-5">
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-800"
-            >
+
+        <form onSubmit={handleLogin} className="p-10">
+          {error && 
+            <div className="mb-3 flex justify-between p-2 rounded-xl border border-red-700 bg-red-300 text-red-700">
+              <small>{error}</small>
+              <button type="button" onClick={()=>setError(null)}>
+                <X/>
+              </button>
+          </div>
+          }
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-800">
               Correo electrónico
             </label>
             <input
               type="email"
+              id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="name@flowbite.com"
+              className="w-full p-2.5 mt-1 border border-gray-900 rounded-lg text-gray-900 bg-white focus:ring-palette-003 focus:border-palette-003"
+              placeholder="correo@ejemplo.com"
               required
             />
           </div>
-          <div className="mb-5">
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-800"
-            >
+
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-800">
               Contraseña
             </label>
             <input
               type="password"
+              id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="w-full p-2.5 mt-1 border border-gray-900 rounded-lg bg-white text-gray-900 focus:ring-palette-003 focus:border-palette-003"
               required
             />
           </div>
+
           <button
             type="submit"
-            className="w-full text-white bg-gray-900 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            className="w-full text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 disabled:opacity-50"
             disabled={loading}
           >
-            Enviar
+            {loading ? "Enviando..." : "Iniciar Sesión"}
           </button>
-        </div>
         </form>
       </div>
     </div>
