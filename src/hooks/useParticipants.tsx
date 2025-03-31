@@ -18,9 +18,9 @@ type Participant = {
   email: string;
   phone_number: string;
   business_name: string;
-  business_sector: string; //carnica, agronomia, ganadera, mineria
-  sub_sector: string; //cerdos, aves, animales
-  business_category: string; //empresa, veterinaria, granja
+  business_sector: string;
+  sub_sector: string;
+  business_category: string;
 };
 export const useParticipants = (myAppId: string) => {
   const { user } = useAuth();
@@ -45,7 +45,6 @@ export const useParticipants = (myAppId: string) => {
       const uniqueParticipants = Array.from(
           new Map(participantsList.map((item) => [item.identification_number, item])).values()
         );
-        console.log(uniqueParticipants, "getParticipants");
 
       setParticipants(uniqueParticipants);
     } catch (err) {

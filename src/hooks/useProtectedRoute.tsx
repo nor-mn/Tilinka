@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import Loading from "@/components/Loading";
 
 export default function useProtectedRoute(){
   const { user, loading } = useAuth();

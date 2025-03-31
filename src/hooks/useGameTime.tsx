@@ -31,7 +31,6 @@ export const useGameTime = (myAppId:string) => {
             })) as GameTime[];
 
             setGameTime(gameTimeList);
-            console.log(gameTimeList,'gameTimeList')
         } catch (error) {
             setError("Error al obtener el tiempo de juego");
         } finally {

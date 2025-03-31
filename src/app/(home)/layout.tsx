@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Tilinka Interactive",
   description: "Portfolio de la empresa Tilinka",
   icons: {
-    icon: "/assets/logo-white.png",
+    icon: "/logo.png",
   }
 };
 

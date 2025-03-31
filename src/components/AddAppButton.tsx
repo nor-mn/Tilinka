@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserApps } from "@/hooks/useUserApps";
+import { useUserApps } from "@/hooks/useMyApps";
 
 const AddAppButton = () => {
   const { addApp } = useUserApps();

@@ -3,21 +3,21 @@ import GameTimeChart from '@/components/charts/GameTimeChart';
 import GameCountChart from '@/components/charts/GameCountChart';
 import GameFrequencyChart from '@/components/charts/GameFrequencyChart';
 import ParticipantsList from '@/components/ParticipantsList';
-import { useUserApps } from '@/hooks/useUserApps';
+import { useMyApps } from '@/hooks/useMyApps';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function AppDetails() {
   const pathname = usePathname();
   const id = pathname?.split('/').pop();
-  const { getMyApp, loading, myApp } = useUserApps();
+  const { getByIdMyApp, loading, myApp } = useMyApps();
   const [countParticipant, setCountParticipant] = useState(0);
   const [totalTime, setTotalTime] = useState<string>('00:00');
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (id && typeof id === 'string' && !isLoaded) {
-      getMyApp(id);
+      getByIdMyApp(id);
       setIsLoaded(true);
     }
   }, [id, myApp, isLoaded]);

@@ -7,13 +7,14 @@ import "../globals.css";
 import useProtectedRoute from '@/hooks/useProtectedRoute';
 import Loading from '@/components/Loading';
 import { Bot, LayoutDashboard, Settings, Users } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  useDocumentTitle('Dashboard')
   return (
     <AuthProvider>
       <html lang="en">

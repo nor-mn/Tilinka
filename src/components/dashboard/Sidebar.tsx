@@ -55,7 +55,7 @@ export function SidebarItems({ icon, text, alert, url, ...props }: SidebarItemsP
             }`}
       >
          {icon}
-         <span className={`overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}`}>
+         <span className={`overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0 h-5"}`}>
             {text}
          </span>
          {alert && (

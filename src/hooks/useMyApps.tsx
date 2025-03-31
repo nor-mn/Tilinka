@@ -15,28 +15,27 @@ type App = {
   active: boolean;
 };
 
-export const useUserApps = () => {
+export const useMyApps = () => {
   const { user } = useAuth();
   const [myApps, setMyApps] = useState<App[]>([]);
   const [myApp, setMyApp] = useState<App | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (user?.uid) {
+    if (!user?.uid) return;
       const userRef = doc(db, "users", user.uid);
       const appsRef = collection(userRef, "my-apps");
 
       const unsubscribe = onSnapshot(appsRef, (querySnapshot) => {
-        const appsList = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as App[];
-
-        setMyApps(appsList);
+        setMyApps(
+          querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          })) as App[]
+        );
       });
 
       return () => unsubscribe();
-    }
   }, [user]);
 
   const addApp = async () => {
@@ -46,12 +45,11 @@ export const useUserApps = () => {
       const userRef = doc(db, "users", user.uid);
       const appsRef = collection(userRef, "my-apps");
 
-      const newApp = {
+      const newApp: Omit<App, "id"> = {
         name: "Cows",
         appdir: "/default",
         appid: crypto.randomUUID(),
         appping: Math.floor(Math.random() * 100) + 1,
-        totalGamePlayTime: Math.floor(Math.random() * 1000) + 1,
         totalStartedGames: Math.floor(Math.random() * 1000) + 1,
         totalFinishedGames: Math.floor(Math.random() * 1000) + 1,
         active: true,
@@ -64,31 +62,27 @@ export const useUserApps = () => {
     }
   };
 
-  const getMyApp = async (id:string) => {
-    if(!id) return;
+  const getByIdMyApp = useCallback(async (id: string) => {
+    if (!id || !user?.uid) return;
+
     try {
       setLoading(true);
       const userRef = doc(db, "users", user.uid);
-      const appRef = doc(userRef, 'my-apps', id);
-      const querySnapshot = await getDoc(appRef);
-      
-      if (querySnapshot.exists()) {
-        const app = {
-          id: querySnapshot.id,
-          ...querySnapshot.data()
-        } as App;
+      const appRef = doc(userRef, "my-apps", id);
+      const docSnap = await getDoc(appRef);
 
-        setMyApp(app); // Actualiza el estado con los datos obtenidos
+      if (docSnap.exists()) {
+        setMyApp({ id: docSnap.id, ...docSnap.data() } as App);
       } else {
-        console.log('No encontrado');
+        console.log("No encontrado");
+        setMyApp(null);
       }
-
     } catch (error) {
-      console.log('Error al extraer datos', error);
+      console.error("Error al extraer datos", error);
     } finally {
       setLoading(false);
     }
-  }
+  }, [user?.uid]);
 
-  return { myApps, myApp, loading, addApp, getMyApp };
+  return { myApps, myApp, loading, addApp, getByIdMyApp };
 };
