@@ -5,7 +5,7 @@ import ParticipantsList from "@/components/ParticipantsList";
 
 // app/dashboard/page.tsx
 export default function DashboardPage() {
-  return <div className="py-4 px-6 content-start">
+  return <div className="py-4 px-6">
     {/* Número de partidas iniciadas 
     numero de partidas terminadas
     tiempo de juego por partida */}
