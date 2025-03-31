@@ -4,20 +4,24 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
-export default function useProtectedRoute(){
-  const { user, loading } = useAuth();
+type UserRole = "admin" | "user";
+
+export default function useProtectedRoute(allowedRoles: UserRole[] = []){
+  const { user, userData, loading } = useAuth();
   const router = useRouter();
-  const [isAllowed, setIsAllowed] = useState(false);
+  const [isAllowed, setIsAllowed] = useState<boolean>(false);
 
   useEffect(() => {
     if (!loading) {
       if (!user) {
-        router.replace("/login"); // Redirige si no hay usuario
+        router.replace("/login");
+      } else if(allowedRoles.length > 0 && !allowedRoles.includes(userData?.role as UserRole)){
+        router.replace("/dashboard/unauthorized");
       } else {
-        setIsAllowed(true);
+        setIsAllowed(true)
       }
     }
-  }, [user, loading, router]);
+  }, [user, userData, loading, allowedRoles, router]);
 
   return { isAllowed, loading };
 };

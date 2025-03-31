@@ -99,7 +99,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setUser(user);
       setUserData(userData);
-      router.push("/dashboard");
+      router.push("/dashboard/my-apps");
     } catch (error: any) {
       setError(error.message); // 🔹 Guardar mensaje de error
     } finally {

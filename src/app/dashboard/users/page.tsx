@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { BadgePlus } from "lucide-react";
 import { Modal } from "@/components/Modal";
 import { useAuth } from "@/context/AuthContext";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 
 export default function UsersPage() {
+  const { isAllowed, loading: loadingAuth } = useProtectedRoute(["admin"]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { register, loading } = useAuth();
   const [formData, setFormData] = useState({
@@ -18,6 +20,9 @@ export default function UsersPage() {
   const [error, setError] = useState("");
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  if (loadingAuth) return <p>Cargando...</p>;
+  if (!isAllowed) return null; 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({

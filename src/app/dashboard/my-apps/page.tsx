@@ -1,4 +1,5 @@
 import MyAppsList from '@/components/MyAppsList'
+import useProtectedRoute from '@/hooks/useProtectedRoute';
 import React from 'react'
 
 export default function MyApps() {

@@ -1,10 +1,13 @@
 "use client";
 
 import BarChart from "@/components/BarChart";
-import ParticipantsList from "@/components/ParticipantsList";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 
 // app/dashboard/page.tsx
 export default function DashboardPage() {
+     const { isAllowed, loading } = useProtectedRoute(["admin"]);
+    if (loading) return <p>Cargando...</p>;
+    if (!isAllowed) return null; 
   return <div className="py-4 px-6">
     {/* Número de partidas iniciadas 
     numero de partidas terminadas
