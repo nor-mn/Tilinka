@@ -41,9 +41,9 @@ export default function AppDetails() {
           { label: "Total de participantes", value: countParticipant },
           { label: "Total del tiempo de juego", value: totalTime },
         ].map((item, index) => (
-          <div key={index} className="p-4 rounded-xl text-center border border-gray-900 bg-gray-50">
+          <div key={index} className="flex flex-col justify-between p-4 rounded-xl text-center border border-gray-900 bg-gray-50">
             <p>{item.label}</p>
-            <strong className="text-4xl sm:text-5xl">{item.value}</strong>
+            <strong className="text-4xl sm:text-5xl mt-auto">{item.value}</strong>
           </div>
         ))}
         
