@@ -69,10 +69,10 @@ const GameTimeChart = ({ myAppId }: { myAppId: any }) => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-lg font-semibold mb-2">Gráfico de Tiempo de Juego</h2>
-      <Bar data={dataForChart} />
-    </div>
+    <>
+    <h2 className="text-lg font-semibold mb-2">Tiempo de Juego</h2>
+    <Bar data={dataForChart} />
+    </>
   );
 };
 

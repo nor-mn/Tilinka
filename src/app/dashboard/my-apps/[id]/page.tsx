@@ -1,63 +1,73 @@
 'use client';
-import BarChart from '@/components/BarChart';
+import GameTimeChart from '@/components/charts/GameTimeChart';
+import GameCountChart from '@/components/charts/GameCountChart';
+import GameFrequencyChart from '@/components/charts/GameFrequencyChart';
 import ParticipantsList from '@/components/ParticipantsList';
 import { useUserApps } from '@/hooks/useUserApps';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function AppDetails() {
-    const pathname = usePathname();
-    const id = pathname?.split('/').pop();
-    const { getMyApp, loading, myApp } = useUserApps();
-    const [ countParticipant, setCountParticipant] = useState(0);
-    const [isLoaded, setIsLoaded] = useState(false);
-    console.log(id)
-    useEffect(() => {
-      if (id && typeof id === 'string' && !isLoaded) {
-        getMyApp(id);
-        setIsLoaded(true)
-      }
-    }, [id, myApp, isLoaded]);
-    
-    if(loading){
-      return <div>Loading ...</div>
-    }
+  const pathname = usePathname();
+  const id = pathname?.split('/').pop();
+  const { getMyApp, loading, myApp } = useUserApps();
+  const [countParticipant, setCountParticipant] = useState(0);
+  const [totalTime, setTotalTime] = useState<string>('00:00');
+  const [isLoaded, setIsLoaded] = useState(false);
 
-    if(!myApp){
-      return;
+  useEffect(() => {
+    if (id && typeof id === 'string' && !isLoaded) {
+      getMyApp(id);
+      setIsLoaded(true);
     }
-    
-    
+  }, [id, myApp, isLoaded]);
+
+  if (loading) {
+    return <div className="text-center py-10 text-lg">Loading...</div>;
+  }
+
+  if (!myApp) {
+    return null;
+  }
+
   return (
-    <div className='py-4 px-6'>
-      <p className='text-[30px]'>Aplicación: { myApp.name }</p>
-      <div className="grid grid-cols-3 gap-4 p-5 rounded-xl border border-gray-900 bg-gradient-to-br from-amber-200/5 from-0% via-palette-005">
-      <p className="col-span-3 text-xl">Número de partidas</p>
-      <div className="p-2 col-span-2 rounded-xl border border-gray-900 bg-gray-50">
-        <BarChart />
+    <div className="py-4 px-6">
+      {/* <p className="text-2xl sm:text-3xl font-semibold">Aplicación: {myApp.name}</p> */}
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-xl border border-gray-900 bg-gradient-to-br from-amber-100 via-cyan-200">
+        {[
+          { label: "Total de partidas iniciadas", value: myApp.totalStartedGames },
+          { label: "Total de partidas terminadas", value: myApp.totalFinishedGames },
+          { label: "Total de participantes", value: countParticipant },
+          { label: "Total del tiempo de juego", value: totalTime },
+        ].map((item, index) => (
+          <div key={index} className="p-4 rounded-xl text-center border border-gray-900 bg-gray-50">
+            <p>{item.label}</p>
+            <strong className="text-4xl sm:text-5xl">{item.value}</strong>
+          </div>
+        ))}
+        
       </div>
-      <div className="grid gap-2">
-        <div className="p-2 rounded-xl text-center border border-gray-900 bg-gray-50">
-          <small>Tiempo total de juego</small> <br />
-          <strong className="text-5xl">{myApp.totalGamePlayTime}</strong>
+
+      <div className="mt-4 p-6 rounded-xl border border-gray-900 bg-gray-50">
+        <GameTimeChart myAppId={id} />
+      </div>
+
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 p-5 rounded-xl border border-gray-900 bg-gradient-to-br from-amber-100 via-palette-005/80">
+        {/* <p className="col-span-1 md:col-span-3 text-xl font-semibold">Número de partidas</p> */}
+        <div className="p-2 rounded-xl border border-gray-900 bg-gray-50">
+          <GameCountChart myAppId={id} setTotalTime={setTotalTime} />
         </div>
-        <div className="p-2 rounded-xl text-center border border-gray-900 bg-gray-50">
-          <small>Total de partidas iniciadas</small> <br />
-          <strong className="text-5xl">{myApp.totalStartedGames}</strong>
+        <div className="p-2 md:col-span-2 rounded-xl border border-gray-900 bg-gray-50">
+          <GameFrequencyChart myAppId={id} />
         </div>
-        <div className="p-2 rounded-xl text-center border border-gray-900 bg-gray-50">
-          <small>Total de partidas terminadas</small> <br />
-          <strong className="text-5xl">{myApp.totalFinishedGames}</strong>
-        </div>
-        <div className="p-2 rounded-xl text-center border border-gray-900 bg-gray-50">
-          <small>Total de participantes</small> <br />
-          <strong className="text-5xl">{countParticipant}</strong>
+      </div>
+
+      <div className="mt-4 rounded-xl border border-gray-900 p-5 bg-gradient-to-br from-amber-100 via-emerald-300">
+        <div className="p-6 rounded-xl border border-gray-900 bg-gray-50">
+          <ParticipantsList myAppId={id} setCount={setCountParticipant} />
         </div>
       </div>
     </div>
-    <div className='mt-2 rounded-xl border border-gray-900 p-5'>
-    <ParticipantsList myAppId={id} setCount={setCountParticipant}/>
-    </div>
-    </div>
-  )
+  );
 }

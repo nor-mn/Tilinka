@@ -69,7 +69,7 @@ const GameCountChart = ({ myAppId, setTotalTime }: { myAppId: any; setTotalTime:
 
   // Verificación para evitar errores si no hay datos
   if (!Object.keys(groupedData).length) {
-    return <p>No hay tiempos de juego registrados para mostrar.</p>;
+    return <p>No hay recuentos de juego registrados para mostrar.</p>;
   }
 
   // Preparar los datos para el gráfico
@@ -89,7 +89,7 @@ const GameCountChart = ({ myAppId, setTotalTime }: { myAppId: any; setTotalTime:
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-2">Gráfico de Tiempo de Juego</h2>
+      <h2 className="text-lg font-semibold mb-2">Recuento de Juego</h2>
       <Pie data={dataForChart} />
     </div>
   );
