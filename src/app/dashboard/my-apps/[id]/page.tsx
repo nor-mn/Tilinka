@@ -32,7 +32,7 @@ export default function AppDetails() {
 
   return (
     <div className="py-4 px-6">
-      {/* <p className="text-2xl sm:text-3xl font-semibold">Aplicación: {myApp.name}</p> */}
+      <p className="text-2xl sm:text-3xl font-semibold">Dashboard: {myApp.name}</p>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-xl border border-gray-900 bg-gradient-to-br from-amber-100 via-cyan-200">
         {[
