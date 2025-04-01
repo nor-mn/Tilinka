@@ -1,9 +1,9 @@
 "use client";
 
-import { useUserApps } from "@/hooks/useMyApps";
+import { useMyApps } from "@/hooks/useMyApps";
 
 const AddAppButton = () => {
-  const { addApp } = useUserApps();
+  const { addApp } = useMyApps();
 
   return (
     <button onClick={addApp} className="bg-blue-500 text-white p-2 rounded">
