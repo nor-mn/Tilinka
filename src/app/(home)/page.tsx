@@ -1,23 +1,4 @@
-"use client";
-import Image from "next/image";
-import dynamic from "next/dynamic";
-// import ThreeScene from "@/components/ThreeScene";
-import { useRef } from "react";
-import gsap from "gsap";
-// import { useGSAP } from '@gsap/react';
-
-// gsap.registerPlugin(useGSAP);
-
 export default function Home() {
-  // const { contextSafe } = useGSAP();
-  // useGSAP(() => {
-  //   gsap.to('.box', { x: 360 });
-  //   },);
-
-  // wrapped in contextSafe() - animation will be cleaned up correctly
-  // const onEnter = contextSafe(({ currentTarget }:{currentTarget:any}): void => {
-  //   gsap.to(currentTarget, { rotation: "+=360" });
-  // });
   return (
       <div className="px-6 lg:px-8">
         <section id="home" className="mx-auto max-w-4xl min-h-screen flex flex-col justify-center items-center text-center">
@@ -78,10 +59,6 @@ export default function Home() {
               </div>
                 </div>
               </div>
-            {/* <div className="grid grid-cols-[1fr_20%]">
-    <div className="bg-red-500 p-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos cumque nobis perspiciatis illo non! Possimus molestias id vel omnis dolores dicta neque ullam ex mollitia architecto minima optio, nobis hic soluta sequi illum facere cumque iure! Eaque itaque, fugit, ex eveniet beatae sit alias nostrum, earum obcaecati a voluptate totam.</div>
-    <div className="bg-green-500 flex justify-center items-center w-full h-full"><p className="bg-yellow-500 [writing-mode:vertical-lr] text-5xl">Lorem, ipsum.</p></div>
-  </div> */}
         </section>
         <section id="about" className="mx-auto max-w-6xl min-h-screen flex flex-col justify-center text-center">
           <strong className="text-5xl">Nosotros</strong>
