@@ -21,7 +21,7 @@ const ParticipantsList = ({ myAppId, setCount }: { myAppId: any; setCount: (val:
       'Teléfono': p.phone_number,
       'Negocio': p.business_name,
       'Sector': p.business_sector,
-      'Rubro': p.sub_sector,
+      // 'Rubro': p.sub_sector,
       'Tipo': p.business_category,
     }));
   };
@@ -58,7 +58,7 @@ const ParticipantsList = ({ myAppId, setCount }: { myAppId: any; setCount: (val:
         <table className="table-auto border-collapse w-full">
           <thead>
             <tr className="bg-gray-200 text-gray-700 text-sm">
-              {['Nombre completo', 'Correo', 'Rango de edad', 'CI', 'Número telefónico', 'Negocio', 'Sector', 'Rubro', 'Tipo'].map((header) => (
+              {['Nombre completo', 'Correo', 'Rango de edad', 'CI', 'Número telefónico', 'Negocio', 'Sector', 'Tipo'].map((header) => (
                 <th key={header} className="p-2 border border-gray-300 text-left">{header}</th>
               ))}
             </tr>
@@ -73,7 +73,7 @@ const ParticipantsList = ({ myAppId, setCount }: { myAppId: any; setCount: (val:
                 <td className="border border-gray-300 p-2">{participant.phone_number}</td>
                 <td className="border border-gray-300 p-2">{participant.business_name}</td>
                 <td className="border border-gray-300 p-2">{participant.business_sector}</td>
-                <td className="border border-gray-300 p-2">{participant.sub_sector}</td>
+                {/* <td className="border border-gray-300 p-2">{participant.sub_sector}</td> */}
                 <td className="border border-gray-300 p-2">{participant.business_category}</td>
               </tr>
             ))}
